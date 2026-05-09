@@ -75,9 +75,16 @@
             @forelse ($notes as $note)
                 <div class="note">
                     <div class="note-body">
-                        {{ Str::words($note->note, 30) }}
-                    </div>
-                    <div class="note-buttons">
+    {{ Str::words($note->note, 30) }}
+</div>
+
+{{-- Timestamp --}}
+<div style="padding:0 18px 8px;font-size:11px;color:#92610099;
+            font-family:'Inter',sans-serif;letter-spacing:0.2px;">
+    🕒 {{ $note->created_at->diffForHumans() }}
+</div>
+
+<div class="note-buttons">
                         <a href="{{ route('notes.show', $note) }}" class="note-view-button">View</a>
                         <a href="{{ route('notes.edit', $note) }}" class="note-edit-button">Edit</a>
                         <form action="{{ route('notes.destroy', $note) }}" method="POST">
@@ -98,10 +105,12 @@
             @endforelse
         </div>
 
-        {{-- Pagination --}}
-        <div style="padding:24px 0;display:flex;justify-content:center;">
-            {{ $notes->links() }}
-        </div>
+      {{-- Pagination --}}
+@if($notes->hasPages())
+    <div style="padding:24px 0;display:flex;justify-content:center;">
+        {{ $notes->appends(['search' => $query])->links() }}
+    </div>
+@endif
 
     </div>
 </x-app-layout>

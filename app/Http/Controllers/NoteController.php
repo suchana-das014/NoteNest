@@ -10,7 +10,7 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-   public function index(Request $request)
+  public function index(Request $request)
 {
     $query = $request->input('search');
 
