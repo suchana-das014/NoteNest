@@ -10,14 +10,19 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $notes = Note::query()
-            ->where('user_id', request()->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate();
-        return view('notes.index', ['notes' => $notes]);
-    }
+   public function index(Request $request)
+{
+    $query = $request->input('search');
+
+    $notes = Note::where('user_id', auth()->id())
+        ->when($query, function ($q) use ($query) {
+            $q->where('note', 'like', '%' . $query . '%');
+        })
+        ->latest()
+        ->paginate(12);
+
+    return view('notes.index', compact('notes', 'query'));
+}
 
     /**
      * Show the form for creating a new resource.
