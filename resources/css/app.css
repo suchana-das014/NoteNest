@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Font import ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@400;500;600&display=swap');
+
+/* ── Reset & base ───────────────────────────────────────────────── */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f5f7ff 0%, #eef2ff 100%);
+    min-height: 100vh;
+}
+
+
+/* ── Page wrapper ───────────────────────────────────────────────── */
+
+.note-container {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+
+/* ── "New Note" button ──────────────────────────────────────────── */
+
+.new-note-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 200px;
+    margin: 0 auto 32px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.new-note-btn::before {
+    content: '＋';
+    font-size: 20px;
+    line-height: 1;
+}
+
+.new-note-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
+}
+
+.new-note-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+}
+
+
+/* ── Notes grid ─────────────────────────────────────────────────── */
+
+.notes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+
+/* ── Note card ──────────────────────────────────────────────────── */
+
+.note {
+    background: linear-gradient(145deg, #fef9c3, #fde68a);
+    border-radius: 16px;
+    width: 280px;
+    box-shadow: 3px 5px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    text-decoration: none;
+    color: #1e1e1e;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.notes .note:hover {
+    transform: translateY(-4px) rotate(0.5deg);
+    box-shadow: 4px 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ── Note body (index cards – clamped) ──────────────────────────── */
+
+.note .note-body {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    line-height: 1.45;
+    padding: 16px 18px 12px;
+    color: #2d2d2d;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+
+/* ── Single-note (show / create / edit) ─────────────────────────── */
+
+.single-note .note {
+    width: 100%;
+    border-radius: 18px;
+    min-height: 260px;
+}
+
+.single-note .note .note-body {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    background: transparent;
+    border: none;
+    resize: vertical;
+    width: 100%;
+    min-height: 220px;
+    padding: 22px 22px 10px;
+    outline: none;
+    color: #1e1e1e;
+    -webkit-line-clamp: unset;
+    display: block;
+    overflow: auto;
+}
+
+.single-note .note .note-body::placeholder {
+    color: #6b5c00;
+    opacity: 0.6;
+}
+
+
+/* ── Note header ────────────────────────────────────────────────── */
+
+.note-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.note-header h1,
+h1.text-3xl {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #3730a3;
+}
+
+
+/* ── Buttons wrapper ────────────────────────────────────────────── */
+
+.note-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 14px 14px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    flex-wrap: wrap;
+}
+
+.note:hover .note-buttons {
+    opacity: 1;
+}
+
+.single-note .note-buttons,
+.note-header .note-buttons {
+    opacity: 1;
+}
+
+
+/* ── Shared button base ─────────────────────────────────────────── */
+
+.note-buttons a,
+.note-buttons button {
+    padding: 7px 15px;
+    border-radius: 9px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    white-space: nowrap;
+}
+
+.note-buttons a:hover,
+.note-buttons button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+}
+
+.note-buttons a:active,
+.note-buttons button:active {
+    transform: translateY(0);
+}
+
+
+/* View – teal */
+
+.note-buttons .note-view-button {
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(13, 148, 136, 0.35);
+}
+
+
+/* Edit – indigo/violet */
+
+.note-buttons .note-edit-button {
+    background: linear-gradient(135deg, #6366f1, #7c3aed);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35);
+}
+
+
+/* Delete – rose */
+
+.note-buttons .note-delete-button {
+    background: linear-gradient(135deg, #f43f5e, #dc2626);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(244, 63, 94, 0.35);
+}
+
+
+/* Cancel – neutral */
+
+.note-buttons .note-cancel-button {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+}
+
+.note-buttons .note-cancel-button:hover {
+    background: #e2e8f0;
+    filter: none;
+}
+
+
+/* Submit – emerald */
+
+.note-buttons .note-submit-button {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.35);
+}
+
+
+/* ── Note date ──────────────────────────────────────────────────── */
+
+.note-date {
+    margin-top: 16px;
+    font-size: 12px;
+    font-style: italic;
+    color: #94a3b8;
+    letter-spacing: 0.3px;
+}
+
+
+/* ── Flash / success message ────────────────────────────────────── */
+
+.success-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border-radius: 12px;
+    margin-bottom: 28px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+
+/* ── Page headings (create / edit) ──────────────────────────────── */
+
+h1:not(.text-3xl) {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #3730a3;
+    margin-bottom: 18px;
+}
